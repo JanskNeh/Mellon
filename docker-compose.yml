@@ -5,8 +5,10 @@ services:
       dockerfile: Dockerfile
     container_name: mellon
     volumes:
-      # Updated to your specific local path
-      - /home/jeyamir/Mellon:/root/.cache
+      # Map your host cache to an internal /app/cache folder
+      - /home/jeyamir/Mellon/cache:/app/cache
+      # If you created the Models folder earlier, keep it too:
+      - /home/jeyamir/Mellon/Models:/app/Models
     networks:
       - coolify
     deploy:
