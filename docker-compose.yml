@@ -4,19 +4,19 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: mellon
-    privileged: true
-    # This is the exact command to force Mellon to speak to Traefik
-    command: uv run main.py --host 0.0.0.0 --port 8088
+    # ✅ Remove the --host/--port command override, config.ini handles it
     ports:
       - '8088:8088'
     volumes:
       - '/home/jeyamir/Mellon/cache:/app/cache'
       - '/home/jeyamir/Mellon/Models:/app/Models'
+      # ✅ Optional: mount config.ini so you can edit without rebuilding
+      - '/home/jeyamir/Mellon/config.ini:/app/config.ini'
     dns:
       - 192.168.21.191
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
-      - 'NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics,display'
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics,display
       - HF_HOME=/app/cache
       - HF_HUB_CACHE=/app/cache/huggingface/hub
     deploy:
@@ -35,6 +35,8 @@ services:
       - "traefik.http.routers.mellon.rule=Host(`mellon.jeyamir.lab`)"
       - "traefik.http.routers.mellon.entrypoints=http"
       - "traefik.http.services.mellon.loadbalancer.server.port=8088"
+    networks:
+      - coolify
     restart: always
 
 networks:
