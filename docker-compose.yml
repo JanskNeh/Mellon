@@ -1,0 +1,28 @@
+services:
+  mellon:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mellon
+    volumes:
+      # Updated to your specific local path
+      - /home/jeyamir/Mellon:/root/.cache
+    networks:
+      - coolify
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    labels:
+      - "coolify.managed=true"
+      - "traefik.enable=true"
+      - "traefik.http.routers.mellon.rule=Host(`mellon.jeyamir.lab`)"
+      - "traefik.http.routers.mellon.entrypoints=http"
+      - "traefik.http.services.mellon.loadbalancer.server.port=8000"
+
+networks:
+  coolify:
+    external: true
