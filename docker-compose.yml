@@ -5,8 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: mellon
     environment:
-      - HF_HOME=/app/cache
-      - HF_HUB_CACHE=/app/cache/huggingface/hub
+      
     volumes:
       # Map the models we moved to your local project folder
       - /home/jeyamir/Mellon/cache:/app/cache
