@@ -21,7 +21,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.mellon.rule=Host(`mellon.jeyamir.lab`)"
       - "traefik.http.routers.mellon.entrypoints=http"
-      - "traefik.http.services.mellon.loadbalancer.server.port=8000"
+      - "traefik.http.services.mellon.loadbalancer.server.port=8088"
 
 networks:
   coolify:
