@@ -18,7 +18,7 @@ RUN git clone https://github.com/cubiq/Mellon.git .
 # ✅ Copy config.ini so Mellon binds to 0.0.0.0
 COPY config.ini /app/config.ini
 
-RUN uv sync --all-extras
+RUN uv sync --extra nunchaku --extra spandrel --extra background-removal --extra quantization
 
 EXPOSE 8088
 
