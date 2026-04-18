@@ -4,10 +4,13 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: mellon
+    environment:
+      - HF_HOME=/app/cache
+      - HF_HUB_CACHE=/app/cache/huggingface/hub
     volumes:
-      # Map your host cache to an internal /app/cache folder
+      # Map the models we moved to your local project folder
       - /home/jeyamir/Mellon/cache:/app/cache
-      # If you created the Models folder earlier, keep it too:
+      # Optional: folder for your own custom models
       - /home/jeyamir/Mellon/Models:/app/Models
     networks:
       - coolify
@@ -23,6 +26,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.mellon.rule=Host(`mellon.jeyamir.lab`)"
       - "traefik.http.routers.mellon.entrypoints=http"
+      # Updated to 8088 based on Mellon's startup logs
       - "traefik.http.services.mellon.loadbalancer.server.port=8088"
 
 networks:
