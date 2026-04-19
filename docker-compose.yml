@@ -9,9 +9,9 @@ services:
       - '8088:8088'
     volumes:
       - '/home/jeyamir/Mellon/cache:/app/cache'
-      - '/home/jeyamir/Mellon/Models:/app/Models'
+      - /home/jeyamir/Mellon/Model:/app/data/models
       # ✅ Optional: mount config.ini so you can edit without rebuilding
-      - '/home/jeyamir/Mellon/config.ini:/app/config.ini'
+      - /home/jeyamir/Mellon/config.ini:/app/config.ini
       - '/home/jeyamir/Mellon/graphs:/app/data/graphs'
     dns:
       - 192.168.21.191
