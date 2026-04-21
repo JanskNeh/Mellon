@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: mellon
-    privileged: true
+    # ✅ Remove the --host/--port command override, config.ini handles it
     shm_size: '8gb'
     ports:
       - '8088:8088'
