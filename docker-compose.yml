@@ -13,6 +13,7 @@ services:
       # ✅ Optional: mount config.ini so you can edit without rebuilding
       - /home/jeyamir/Mellon/config.ini:/app/config.ini
       - '/home/jeyamir/Mellon/graphs:/app/data/graphs'
+      - '/home/jeyamir/Mellon:/app'
     dns:
       - 192.168.21.191
     environment:
